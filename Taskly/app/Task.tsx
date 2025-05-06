@@ -15,9 +15,13 @@ type TaskProps = {
 };
 
 function Task({ tasks }: TaskProps) {
+    const soretedTasks = [...tasks].sort((a, b) => {
+        return Number(a.Finished) - Number(b.Finished);
+    });
+    
     return (
         <View style={styles.container}>
-            {tasks.map((task, index: number) => (
+            {soretedTasks.map((task, index: number) => (
                 <TouchableOpacity
                     key={index}
                     onPress={() => (task.Finished = !task.Finished)}
@@ -62,11 +66,11 @@ const styles = StyleSheet.create({
     },
     taskLineThrough: {
         position: "absolute",
-        top: "50%",
+        top: "40%",
         left: 0,
         right: 0,
         height: 2,
-        backgroundColor: "#DAD7D7",
+        backgroundColor: "#000000",
         opacity: 0.25,
         zIndex: 1,
     },
@@ -92,6 +96,7 @@ const styles = StyleSheet.create({
         fontSize: width * 0.035,
         color: "#888",
         textAlign: "right",
+        marginBottom: width * 0.02,
     },
     line: {
         position: "absolute",
